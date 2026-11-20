@@ -1,0 +1,14 @@
+# Fuentes y decisiones de preparación
+
+- Galaxy10 SDSS: https://astronn.readthedocs.io/en/stable/galaxy10sdss.html . Imágenes de SDSS y etiquetas Galaxy Zoo; citar Lintott et al. (2008, 2011) y el compilador Henry Leung. Fuente binaria: https://www.astro.utoronto.ca/~bovy/Galaxy10/Galaxy10.h5 . No confundir SDSS (69x69) con DECaLS (256x256). Muestra aleatoria estratificada de 6.000 entre las nueve clases conservadas; los conteos originales no se balancearon artificialmente.
+- PLAsTiCC Team: https://zenodo.org/records/2539456 ; DOI 10.5281/zenodo.2539456. Documentación de modelos: note2_modelNames.pdf del mismo depósito. Clases 90=Ia, 42=II, 62=Ibc. Se usa únicamente el conjunto train etiquetado publicado y se crea una partición educativa 60/20/20; NO se reporta un score del desafío original. La nota de modelos contiene pequeñas discrepancias globales de conteos; se usan los conteos efectivamente leídos de los CSV.
+- UCI HAR: https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones ; DOI 10.24432/C54S4K. Anguita et al. (2013). Conservar atribución y documentación original incluida. Test oficial por personas; cinco personas del train oficial se reservan para validación. No se reconstruyen señales desde las 561 features.
+- Stanford Dogs: http://vision.stanford.edu/aditya86/ImageNetDogs/main.html ; Khosla et al. (2011), Novel Dataset for Fine-Grained Image Categorization. Copia usada: https://huggingface.co/datasets/Alanox/stanford-dogs/tree/00c2ba455d1c85a01f14c6c5e1ec8524eeb33a1f . Su metadata incluye nombres, clases y cajas; no incluye la división oficial. Se registra el origen de la copia, sin afirmar equivalencia byte a byte con el servidor original inaccesible. Uso educativo del curso; las imágenes mantienen los derechos de sus titulares y no se atribuye una licencia nueva a este material.
+
+## Campos comunes NPZ
+
+X: entradas sin estandarización aprendida. y: etiquetas enteras consecutivas desde 0. names: nombres en el mismo orden. ids: identificador original o fila trazable. split: train/val/test. En Galaxy10, original_label conserva el código fuente. En HAR, subject sirve para separación y análisis, NUNCA como predictor. En Dogs, X_crop contiene la versión recortada de X con la misma fila, etiqueta y split.
+
+## PLAsTiCC
+
+CSV de observaciones: object_id, mjd (días), passband (0=u, 1=g, 2=r, 3=i, 4=z, 5=y), flux, flux_err y detected_bool. Flujos en unidades del archivo original; no convertir directamente en magnitud cuando sean negativos. `detected_bool` se conserva para interpretación pero no forma parte de la representación de referencia. Las 72 features son 12 por banda: count, presence, median, P90-P10, IQR, std, min, max, median_flux_err, max_flux/err, fraction_flux/err_above_5, time_span_days. El cociente SNR se calcula punto a punto antes de resumir. No se usan true_peakmjd, true_z, hostgal_specz ni target como features.

@@ -1,0 +1,41 @@
+{
+  "n": 10299,
+  "shape": [
+    10299,
+    561
+  ],
+  "classes": [
+    "Caminar",
+    "Subir escaleras",
+    "Bajar escaleras",
+    "Sentarse",
+    "Estar de pie",
+    "Acostarse"
+  ],
+  "splits": {
+    "train": {
+      "Caminar": 875,
+      "Subir escaleras": 752,
+      "Bajar escaleras": 686,
+      "Sentarse": 894,
+      "Estar de pie": 983,
+      "Acostarse": 986
+    },
+    "val": {
+      "Caminar": 351,
+      "Subir escaleras": 321,
+      "Bajar escaleras": 300,
+      "Sentarse": 392,
+      "Estar de pie": 391,
+      "Acostarse": 421
+    },
+    "test": {
+      "Caminar": 496,
+      "Subir escaleras": 471,
+      "Bajar escaleras": 420,
+      "Sentarse": 491,
+      "Estar de pie": 532,
+      "Acostarse": 537
+    }
+  }
+}
